@@ -15,3 +15,5 @@ echo (Kacho::open('/tmp/proba.php')->read($_SERVER);
 ```
 
 Make sure that the locations that you provide for the cache files are **writable**, e.g. you can create new files there.
+
+Migrated from https://code.google.com/archive/p/kacho/
