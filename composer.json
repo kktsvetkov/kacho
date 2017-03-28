@@ -1,0 +1,15 @@
+{
+  "name": "kktsvetkov/kacho",
+  "description": "Kacho: File-based PHP5 caching library",
+  "keywords": ["cache", "caching"],
+  "homepage": "https://github.com/kktsvetkov/kacho/",
+  "license": "LGPL-3.0",
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "kacho": ""
+    }
+  } 
+}
