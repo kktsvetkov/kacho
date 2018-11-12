@@ -9,12 +9,12 @@ Here is an example of how to use it:
 
 ```
 /* Cache current $_SERVER array for one hour */
-echo (Kacho::open('/tmp/proba.php')->wrote($_SERVER, 3600)
+echo Kacho::open('/tmp/proba.php')->write($_SERVER, 3600)
 	? 'Kacho caching is OK :)'
 	: 'Kacho caching failed :(';
 
 /* Read the cached $_SERVER array */
-echo (Kacho::open('/tmp/proba.php')->read($_SERVER);
+echo Kacho::open('/tmp/proba.php')->read($_SERVER);
 ```
 
 Make sure that the locations that you provide for the cache files are **writable**, e.g. you can create new files there.

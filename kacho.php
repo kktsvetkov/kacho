@@ -64,7 +64,12 @@ class Kacho
 	*/
 	public function read()
 	{
-		@include($this->filename);
+		if (!file_exists($this->filename))
+		{
+			return false;
+		}
+
+		include($this->filename);
 		$c = 'kacho_' . md5($this->filename);
 		return isset($$c) ? $$c : false;
 	}
@@ -78,28 +83,31 @@ class Kacho
 	*/
 	public function write($data, $expire = 3600)
 	{
-
 		$tmp_name = tempnam(dirname($this->filename), basename($this->filename));
 		$md5 = md5($this->filename);
 
-		@file_put_contents(
+		file_put_contents(
 			$tmp_name,
 			'<?php if(' . intval(time() + $expire) . '>time())$kacho_'
 				. $md5 . '=' . var_export($data, 1)
 				. ';',
 			LOCK_EX
 			);
-		@unlink($this->filename);
-		@rename($tmp_name, $this->filename);
+		if (file_exists($this->filename))
+		{
+			unlink($this->filename);
+		}
+
+		rename($tmp_name, $this->filename);
 
 		if ($this->chgrp)
 		{
-			@chgrp($this->filename, $this->chgrp);
+			chgrp($this->filename, $this->chgrp);
 		}
 
 		if ($this->chmod)
 		{
-			@chmod($this->filename, $this->chmod);
+			chmod($this->filename, $this->chmod);
 		}
 
 		// compare the original data and the stored one
